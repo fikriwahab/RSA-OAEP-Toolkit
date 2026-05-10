@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+*.pyo
+
+# PyInstaller intermediate artifacts. The dist/ directory holds the final
+# binary that ships with the repository, so it is intentionally tracked.
+build/
+*.spec
+
+# Logo asset is kept out of source control. The assets/ folder itself stays
+# tracked through .gitkeep so the path resolves the same way locally.
+assets/logo.png
+
+# Editor and OS junk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
