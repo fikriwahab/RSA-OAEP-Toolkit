@@ -52,7 +52,7 @@ pip install pyinstaller
 python build.py
 ```
 
-The output is placed under `dist/`. On Windows the binary is named `RSA-OAEP.exe` and can be launched by double-clicking; on Linux and macOS the file is just `RSA-OAEP`. The logo asset and all source modules are bundled into the single-file binary, so the executable is self-contained and does not depend on a Python installation on the target machine.
+The output is placed under `dist/`. On Windows the binary is named `RSA-OAEP.exe` and can be launched by double-clicking; on Linux and macOS the file is just `RSA-OAEP`.
 
 ## Key file format
 
