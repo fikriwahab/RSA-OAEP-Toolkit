@@ -1,5 +1,13 @@
 # RSA-OAEP-256 File Tool
 
+Tugas Pemrograman Kriptografi & Keamanan Informasi Genap 2025/2026
+
+## Group 1 Authors
+
+- Fikri Massaid Wahab (2206083395)
+- Fariska Fedira Ardhanariswari (2206815705)
+- Rana Koesumastuti (2206083496)
+
 RSA-OAEP-256 file encryption written in pure Python without external crypto libraries. CLI and GUI included.
 
 ## Features
