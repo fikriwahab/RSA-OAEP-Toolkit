@@ -1,12 +1,12 @@
 """Self-tests for OAEP encoding and decoding."""
 
 import os
-import secrets
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 
 from oaep import oaep_encode, oaep_decode, DecryptionError, HASH_LEN
+from prng import random_bytes
 
 
 K = 256  # 2048-bit modulus
@@ -15,7 +15,7 @@ MAX_MESSAGE = K - 2 * HASH_LEN - 2
 
 def test_round_trip_various_lengths():
     for size in (0, 1, 16, 100, MAX_MESSAGE):
-        message = secrets.token_bytes(size)
+        message = random_bytes(size)
         encoded = oaep_encode(message, K)
         if len(encoded) != K:
             raise AssertionError("encoded length is " + str(len(encoded)))

@@ -1,6 +1,6 @@
 """Probable prime generation using the Miller-Rabin primality test."""
 
-import secrets
+from prng import random_bits, random_int_below
 
 
 # Small primes used as a fast pre-filter before running Miller-Rabin.
@@ -52,7 +52,7 @@ def is_probably_prime(n, rounds=40):
         d //= 2
         r += 1
     for _ in range(rounds):
-        a = secrets.randbelow(n - 3) + 2  # uniform in [2, n - 2]
+        a = random_int_below(n - 3) + 2  # uniform in [2, n - 2]
         x = pow(a, d, n)
         if x == 1 or x == n - 1:
             continue
@@ -76,8 +76,8 @@ def generate_prime(bits):
     """
     if bits < 16:
         raise ValueError("bit length must be at least 16")
-    top_bits_mask = (3 << (bits - 2)) | 1
+    extra_bits_mask = (1 << (bits - 2)) | 1
     while True:
-        candidate = secrets.randbits(bits) | top_bits_mask
+        candidate = random_bits(bits) | extra_bits_mask
         if is_probably_prime(candidate):
             return candidate

@@ -1,12 +1,12 @@
 """Self-tests for RSA key generation and primitive operations."""
 
 import os
-import secrets
 import sys
 import time
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 
+from prng import random_int_below
 from rsa import generate_keypair, rsaep, rsadp
 
 
@@ -39,7 +39,7 @@ def test_primitive_round_trip():
     public_key, private_key = generate_keypair(TEST_BITS)
     n = public_key["n"]
     for _ in range(5):
-        m = secrets.randbelow(n - 1) + 1
+        m = random_int_below(n - 1) + 1
         c = rsaep(public_key, m)
         m_back = rsadp(private_key, c)
         if m_back != m:
@@ -50,7 +50,7 @@ def test_crt_matches_textbook():
     public_key, private_key = generate_keypair(TEST_BITS)
     textbook = {"n": private_key["n"], "d": private_key["d"]}
     for _ in range(3):
-        m = secrets.randbelow(public_key["n"] - 1) + 1
+        m = random_int_below(public_key["n"] - 1) + 1
         c = rsaep(public_key, m)
         if rsadp(private_key, c) != rsadp(textbook, c):
             raise AssertionError("CRT decryption disagrees with textbook formula")

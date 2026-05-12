@@ -5,10 +5,9 @@ raises a single generic DecryptionError on any failure to avoid leaking
 information about why a particular ciphertext was rejected.
 """
 
-import secrets
-
 from sha256 import sha256, DIGEST_SIZE
 from mgf1 import mgf1
+from prng import random_bytes
 
 
 HASH_LEN = DIGEST_SIZE
@@ -52,7 +51,7 @@ def oaep_encode(message, k, label=b""):
     label_hash = sha256(label)
     padding = b"\x00" * (max_len - m_len)
     data_block = label_hash + padding + b"\x01" + bytes(message)
-    seed = secrets.token_bytes(HASH_LEN)
+    seed = random_bytes(HASH_LEN)
     db_mask = mgf1(seed, k - HASH_LEN - 1)
     masked_db = _xor_bytes(data_block, db_mask)
     seed_mask = mgf1(masked_db, HASH_LEN)

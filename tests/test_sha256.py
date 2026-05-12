@@ -2,11 +2,11 @@
 
 import hashlib
 import os
-import secrets
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 
+from prng import random_bytes, random_int_below
 from sha256 import sha256
 
 
@@ -40,8 +40,8 @@ def test_known_vectors():
 
 def test_random_against_reference():
     for _ in range(20):
-        size = secrets.randbelow(2048)
-        data = secrets.token_bytes(size)
+        size = random_int_below(2048)
+        data = random_bytes(size)
         expect_equal(sha256(data), hashlib.sha256(data).digest(), "random size " + str(size))
 
 
