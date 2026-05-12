@@ -91,6 +91,7 @@ The CRT fields (`p`, `q`, `dP`, `dQ`, `qInv`) on a private key are optional. If 
 python tests/test_sha256.py
 python tests/test_oaep.py
 python tests/test_rsa.py
+python tests/test_keyio.py
 python tests/test_e2e.py
 ```
 
